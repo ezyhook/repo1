@@ -201,7 +201,7 @@ getrec(data_voteinfo, url).then(function(value) {
 			  let rew_in_epo = [];
 			  return getrec(data_reward, url).then(function(value)
 		      { 
-		          setTimeout(() => {}, 200);
+		          setTimeout(() => {}, 300);
 		          rew_in_epo.push(value.result[0].epoch);
 		          rew_in_epo.push(value.result[0].commission);
 		          rew_in_epo.push(value.result[0].amount);
