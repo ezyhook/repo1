@@ -201,7 +201,7 @@ getrec(data_voteinfo, url).then(function(value) {
 			  let rew_in_epo = [];
 			  return getrec(data_reward, url).then(function(value)
 		      { 
-		          setTimeout(() => {}, 300);
+		          setTimeout(() => {}, 200);
 		          rew_in_epo.push(value.result[0].epoch);
 		          rew_in_epo.push(value.result[0].commission);
 		          rew_in_epo.push(value.result[0].amount);
@@ -394,7 +394,7 @@ getrec(data_voteinfo, url).then(function(value) {
 					let item = "<tr><td></td><td id=" + id1 + "></td><td id=" + id2 + "></td><td id=" + id3 + "></td><td id=" + id4 + "></td></tr>";
 					table += item;
 				}
-				let outtable = "<table class=table><thead><tr><th>Time to next:</th><th>Days</th><th>Hours</th><th>Minutes</th><th>Seconds</th></tr></thead><tbody><tr><td></td><td id=echod></td><td id=echoh></td><td id=echom></td><td id=echos></td></tr>" + table + "</tbody></table>";
+				let outtable = "<details class=link><summary>Time to next:</summary><table class=table><thead><tr><th>Time to next:</th><th>Days</th><th>Hours</th><th>Minutes</th><th>Seconds</th></tr></thead><tbody><tr><td></td><td id=echod></td><td id=echoh></td><td id=echom></td><td id=echos></td></tr>" + table + "</tbody></table></details>";
 				docwrite(outtable);
 				document.getElementById("echod").innerText = echo[0];
 				document.getElementById("echoh").innerText = echo[1];
