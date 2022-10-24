@@ -201,7 +201,7 @@ getrec(data_voteinfo, url).then(function(value) {
 			  let rew_in_epo = [];
 			  return getrec(data_reward, url).then(function(value)
 		      { 
-		          setTimeout(() => {console.log("Delayed for 0.5 sec.");}, 500);
+		          //setTimeout(() => {console.log("Delayed for 0.5 sec.");}, 500);
 		          rew_in_epo.push(value.result[0].epoch);
 		          rew_in_epo.push(value.result[0].commission);
 		          rew_in_epo.push(value.result[0].amount);
