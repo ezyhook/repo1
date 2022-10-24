@@ -204,8 +204,6 @@ details{
   border-radius: 8px;
   overflow:hidden;
   margin-bottom: 1.5rem;
-  margin-left: auto;
-  margin-right: auto;
 }
 summary::-webkit-details-marker{display:none;}
 summary::-moz-list-bullet{list-style-type:none;}
