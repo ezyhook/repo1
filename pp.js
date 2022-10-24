@@ -317,17 +317,17 @@ getrec(data_voteinfo, url).then(function(value) {
       		  	docwrite(outtable1);
       		  	sum_rew = 0;
       		  	for (let g = 0; g < 10; g++) {
-                        let ir1 = "r1_" + g;
-                        let ir2 = "r2_" + g;
-                        let ir3 = "r3_" + g;
-      		  			let ir4 = "r4_" + g;
-      	  				document.getElementById(ir1).innerText = values[g][0];
-      				  	document.getElementById(ir2).innerText = values[g][1];
-      			  		document.getElementById(ir3).innerText = values[g][2]/1000000000;
-      			  		document.getElementById(ir4).innerText = values[g][3]/1000000000;
-      			  		sum_rew += values[g][2]/1000000000;
-      			  }
-      			  document.getElementById("sumrew").innerText =sum_rew;
+                        	let ir1 = "r1_" + g;
+                        	let ir2 = "r2_" + g;
+                        	let ir3 = "r3_" + g;
+      		  		let ir4 = "r4_" + g;
+      	  			document.getElementById(ir1).innerText = values[g][0];
+      				document.getElementById(ir2).innerText = values[g][1];
+      			  	document.getElementById(ir3).innerText = values[g][2]/1000000000;
+      			  	document.getElementById(ir4).innerText = values[g][3]/1000000000;
+      			  	sum_rew += values[g][2]/1000000000;
+      			}
+      			document.getElementById("sumrew").innerText =sum_rew;
       			});
 
 			let cluster_slot_d = cluster_slot_d1.result.slotIndex;
