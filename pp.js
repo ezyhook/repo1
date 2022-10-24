@@ -121,7 +121,7 @@ function checkValidity(val_key)
 				input.classList.remove('text-field__input_valid');
 				input.classList.add('text-field__input_invalid');
 				input.nextElementSibling.textContent = 'Not valid';
-				alert("Pub-key is not vailed");
+				alert("Pub-key is not valid");
 				location.reload();
 			});
 	}
@@ -245,7 +245,7 @@ getrec(data_voteinfo, url).then(function(value) {
 		{
 			if (value.error.code == "-32602")
 			{
-				alert("Pub-key is not vailed");
+				alert("Pub-key is not valid");
 				location.reload();
 			}
 		}
@@ -265,7 +265,7 @@ getrec(data_voteinfo, url).then(function(value) {
 				}
 				else
 				{
-					alert("Pub-key is not vailed");
+					alert("Pub-key is not valid");
 					location.reload();
 				}
 			}
@@ -273,7 +273,7 @@ getrec(data_voteinfo, url).then(function(value) {
 			{
 				if (value.error.code == "-32602")
 				{
-					alert("Pub-key is not vailed");
+					alert("Pub-key is not valid");
 					location.reload();
 				}
 			}
