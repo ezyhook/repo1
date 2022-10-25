@@ -137,7 +137,8 @@ function sendForm()
 	}
 	else if (document.getElementById('radio-2').checked)
 	{
-		val_url = "https://api.mainnet-beta.solana.com";
+		//val_url = "https://api.mainnet-beta.solana.com";
+		val_url = "https://quaint-frequent-smoke.solana-mainnet.discover.quiknode.pro/c62fc1839a7f9a8e955f3f5783b7de773dca4b72/";
 	}
 	let val_key = document.getElementById("key").value;
 	showinfo(val_url, val_key);
@@ -323,7 +324,7 @@ getrec(data_voteinfo, url).then(function(value) {
                   let ir3 = "r3_" + g;
       		  		  let ir4 = "r4_" + g;
       	  			  document.getElementById(ir1).innerText = values[g][0];
-      				    document.getElementById(ir2).innerText = values[g][1];
+      				  document.getElementById(ir2).innerText = values[g][1];
       			  	  document.getElementById(ir3).innerText = values[g][2]/1000000000;
       			  	  document.getElementById(ir4).innerText = values[g][3]/1000000000;
       			  	  sum_rew += values[g][2]/1000000000;
