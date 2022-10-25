@@ -317,17 +317,17 @@ getrec(data_voteinfo, url).then(function(value) {
       		  	docwrite(outtable1);
       		  	sum_rew = 0;
       		  	for (let g = 0; g < 10; g++) {
-                        	let ir1 = "r1_" + g;
-                        	let ir2 = "r2_" + g;
-                        	let ir3 = "r3_" + g;
-      		  		let ir4 = "r4_" + g;
-      	  			document.getElementById(ir1).innerText = values[g][0];
-      				document.getElementById(ir2).innerText = values[g][1];
-      			  	document.getElementById(ir3).innerText = values[g][2]/1000000000;
-      			  	document.getElementById(ir4).innerText = values[g][3]/1000000000;
-      			  	sum_rew += values[g][2]/1000000000;
-      			}
-      			document.getElementById("sumrew").innerText =sum_rew;
+                  let ir1 = "r1_" + g;
+                  let ir2 = "r2_" + g;
+                  let ir3 = "r3_" + g;
+      		  		  let ir4 = "r4_" + g;
+      	  			  document.getElementById(ir1).innerText = values[g][0];
+      				    document.getElementById(ir2).innerText = values[g][1];
+      			  	  document.getElementById(ir3).innerText = values[g][2]/1000000000;
+      			  	  document.getElementById(ir4).innerText = values[g][3]/1000000000;
+      			  	  sum_rew += values[g][2]/1000000000;
+      			  }
+      			  document.getElementById("sumrew").innerText =sum_rew;
       			});
 
 			let cluster_slot_d = cluster_slot_d1.result.slotIndex;
@@ -366,7 +366,7 @@ getrec(data_voteinfo, url).then(function(value) {
 			
 			if (typeof(next_slots[0]) != "undefined" && all > Done)
 			{
-			    let echo = [];
+			  let echo = [];
 				let current_slot = next_slots[0];
 				let left_slot = current_slot - cluster_slot_d;
 				let secs = left_slot * time_const_d;
@@ -415,7 +415,7 @@ getrec(data_voteinfo, url).then(function(value) {
 			else
 			{
 			  let echo = [];
-			  docwrite("<table class=table><thead><tr><th>All slots Done. Time end epoh:</th><th>Days</th><th>Hours</th><th>Minutes</th><th>Seconds</th></tr></thead><tbody><tr><td></td><td id=echod></td><td id=echoh></td><td id=echom></td><td id=echos></td></tr></tbody></table>");
+			  docwrite("<table class=table><thead><tr><th>All slots Done. Time to end of the epoch:</th><th>Days</th><th>Hours</th><th>Minutes</th><th>Seconds</th></tr></thead><tbody><tr><td></td><td id=echod></td><td id=echoh></td><td id=echom></td><td id=echos></td></tr></tbody></table>");
 				let secs_end_epoh = (end_slot_d - cluster_slot_d) * time_const_d;
 				echo = echotime(secs_end_epoh);
 				document.getElementById("echod").innerText = echo[0];
