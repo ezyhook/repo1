@@ -267,8 +267,8 @@ getrec(data_voteinfo, url).then(function(value) {
 				}
 				else
 				{
-					alert("Pub-key is not valid");
-					location.reload();
+					//alert("Pub-key is not valid");
+					//location.reload();
 				}
 			}
 			catch (err)
