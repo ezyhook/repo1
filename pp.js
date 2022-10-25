@@ -79,7 +79,7 @@ function checkValidity(val_key)
 			val_url = "https://api.mainnet-beta.solana.com";
 		}
 		let data_voteinfo = '{"jsonrpc":"2.0", "id": 1, "method":"getVoteAccounts", "params": [{"votePubkey":"' + val_key +'"}]}';
-        getrec(data_voteinfo, val_url)
+    getrec(data_voteinfo, val_url)
 			.then(function(value)
 			{   
 			    let pubkey;
@@ -206,7 +206,7 @@ getrec(data_voteinfo, url).then(function(value) {
 		          rew_in_epo.push(value.result[0].commission);
 		          rew_in_epo.push(value.result[0].amount);
 		          rew_in_epo.push(value.result[0].postBalance);
-		        return rew_in_epo;
+		          return rew_in_epo;
 		      });
 			}
 			for (let i = 1; i < 11; i++) {
