@@ -195,6 +195,11 @@
 .table tbody tr td:last-child {
 	border-radius: 0 8px 8px 0;
 }
+.table .false {
+    background: #98FB98;
+}
+.table .true {
+    background: #FF0000;
 details{
   display:block;
   background: #fff;
