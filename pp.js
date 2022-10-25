@@ -415,7 +415,7 @@ getrec(data_voteinfo, url).then(function(value) {
 			else
 			{
 			  let echo = [];
-			  docwrite("<table class=table><thead><tr><th>All slots Done. Time to end of the epoch:</th><th>Days</th><th>Hours</th><th>Minutes</th><th>Seconds</th></tr></thead><tbody><tr><td></td><td id=echod></td><td id=echoh></td><td id=echom></td><td id=echos></td></tr></tbody></table>");
+			  docwrite("<table class=table><thead><tr><th>All slots Done. Time until the end of the epoch:</th><th>Days</th><th>Hours</th><th>Minutes</th><th>Seconds</th></tr></thead><tbody><tr><td></td><td id=echod></td><td id=echoh></td><td id=echom></td><td id=echos></td></tr></tbody></table>");
 				let secs_end_epoh = (end_slot_d - cluster_slot_d) * time_const_d;
 				echo = echotime(secs_end_epoh);
 				document.getElementById("echod").innerText = echo[0];
