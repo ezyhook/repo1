@@ -132,7 +132,8 @@ function sendForm()
 	let val_url;
 	if (document.getElementById('radio-1').checked)
 	{
-		val_url = "https://api.testnet.solana.com";
+		//val_url = "https://api.testnet.solana.com";
+		val_url = "https://fittest-serene-liquid.solana-testnet.discover.quiknode.pro/f3e2b1ac3303a0b16938af9fe8985c15310c02e8/";
 	}
 	else if (document.getElementById('radio-2').checked)
 	{
