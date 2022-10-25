@@ -1,17 +1,17 @@
 let _radio1 = document.getElementById('radio-1');
 _radio1.addEventListener("change", () =>
 {
-	checkValidity(document.getElementById("key").value);
+	checkValidity(document.getElementById("key").value.replace(/\s/g, ""));
 });
 let _radio2 = document.getElementById('radio-2');
 _radio2.addEventListener("change", () =>
 {
-	checkValidity(document.getElementById("key").value);
+	checkValidity(document.getElementById("key").value.replace(/\s/g, ""));
 });
 let _input = document.getElementById('key');
 _input.addEventListener("change", () =>
 {
-	checkValidity(document.getElementById("key").value);
+	checkValidity(document.getElementById("key").value.replace(/\s/g, ""));
 });
 let _round = Math.round;
 Math.round = function(number, decimals /* optional, default 0 */ )
@@ -140,7 +140,7 @@ function sendForm()
 		val_url = "https://api.mainnet-beta.solana.com";
 		//val_url = "https://quaint-frequent-smoke.solana-mainnet.discover.quiknode.pro/c62fc1839a7f9a8e955f3f5783b7de773dca4b72/";
 	}
-	let val_key = document.getElementById("key").value;
+	let val_key = document.getElementById("key").value.replace(/\s/g, "");
 	showinfo(val_url, val_key);
 }
 //---------------------------------------------------------------
