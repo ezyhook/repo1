@@ -137,8 +137,8 @@ function sendForm()
 	}
 	else if (document.getElementById('radio-2').checked)
 	{
-		//val_url = "https://api.mainnet-beta.solana.com";
-		val_url = "https://quaint-frequent-smoke.solana-mainnet.discover.quiknode.pro/c62fc1839a7f9a8e955f3f5783b7de773dca4b72/";
+		val_url = "https://api.mainnet-beta.solana.com";
+		//val_url = "https://quaint-frequent-smoke.solana-mainnet.discover.quiknode.pro/c62fc1839a7f9a8e955f3f5783b7de773dca4b72/";
 	}
 	let val_key = document.getElementById("key").value;
 	showinfo(val_url, val_key);
