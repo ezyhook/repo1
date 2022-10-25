@@ -235,8 +235,7 @@ getrec(data_voteinfo, url).then(function(value) {
 		{
 			if (Object.keys(value.result).length === 0)
 			{
-				alert("Pub-key is not vailed");
-				location.reload();
+				return 0;
 			}
 			else
 			{
@@ -261,15 +260,7 @@ getrec(data_voteinfo, url).then(function(value) {
 			let bal = value.result.value;
 			try
 			{
-				if (bal > 0)
-				{
-					return (bal / 1000000000);
-				}
-				else
-				{
-					//alert("Pub-key is not valid");
-					//location.reload();
-				}
+				return (bal / 1000000000);
 			}
 			catch (err)
 			{
