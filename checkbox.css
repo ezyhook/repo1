@@ -195,10 +195,10 @@
 .table tbody tr td:last-child {
 	border-radius: 0 8px 8px 0;
 }
-.table .false {
+.false {
     background: #98FB98;
 }
-.table .true {
+.true {
     background: #FF0000;
 }
 details{
