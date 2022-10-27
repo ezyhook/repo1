@@ -148,16 +148,17 @@ function showinfo(url, vote_key)
 	let data_voteinfo = '{"jsonrpc": "2.0", "id": 1, "method": "getVoteAccounts", "params": [{"votePubkey": "' + vote_key + '"}]}';
 	getrec(data_voteinfo, url).then(function(value)
 	{
-		let key;
-		let del_status;
+		let key, del_status, stake;
 		if (value["result"]["current"].length != 0)
 		{
 			key = value["result"]["current"][0]["nodePubkey"];
+			stake = value["result"]["current"][0]["activatedStake"]/1000000000;
 			del_status = false;
 		}
 		else if (value["result"]["delinquent"].length != 0)
 		{
 			key = value["result"]["delinquent"][0]["nodePubkey"];
+			stake = value["result"]["current"][0]["activatedStake"]/1000000000;
 			del_status = true;
 		}
 		const params_t = 5;
@@ -204,7 +205,7 @@ function showinfo(url, vote_key)
 				    let table1 = "";
 						for (let g = 0; g < 10; g++)
 						{
-							let item1 = "<tr><td id=r1_" + g + "></td><td id=r2_" + g + "></td><td id=r3_" + g + "></td><td id=r4_" + g + "></td></tr>";
+							let item1 = "<tr><td id=r1_" + g + "></td><td id=r5_" + g + "></td><td id=r2_" + g + "></td><td id=r3_" + g + "></td><td id=r4_" + g + "></td></tr>";
 							table1 += item1;
 						}
 						let outtable1 = "<table class=table><thead><th>Epoch</th><th>Commission</th><th>Rewards</th><th>Balance</th></tr></thead><tbody>" + table1 + "<th></th><th>Total:</th><th id=sumrew></th><th></th></tr></tbody></table>";
@@ -371,7 +372,7 @@ function showinfo(url, vote_key)
 					    skip = Math.round((skipped * 100 / Done), 2);
 				    }
 				}
-				let metrics = "<table class=table><thead><tr><th>Metrics</th><th>Value</th></tr></thead><tbody><tr><td>Delinquent status</td><td id=del class=" + del_status + "></td></tr><tr><td>Balance identity</td><td id=balance></td></tr><tr><td>All blocks:</td><td id=all></td></tr><tr><td>Done blocks:</td><td id=Done></td></tr><tr><td>Will be done:</td><td id=will_done></td></tr><tr><td>Skipped blocks:</td><td id=skipped></td></tr><tr><td>Skip:</td><td id=skip></td></tr></tbody></table>";
+				let metrics = "<table class=table><thead><tr><th>Metrics</th><th>Value</th></tr></thead><tbody><tr><td>Delinquent status</td><td id=del class=" + del_status + "></td></tr><tr><td>Balance identity</td><td id=balance></td></tr><tr><td>Activated Stake</td><td id=stake></td></tr><tr><td>All blocks:</td><td id=all></td></tr><tr><td>Done blocks:</td><td id=Done></td></tr><tr><td>Will be done:</td><td id=will_done></td></tr><tr><td>Skipped blocks:</td><td id=skipped></td></tr><tr><td>Skip:</td><td id=skip></td></tr></tbody></table>";
 				document.write(metrics);
 				document.getElementById("del").innerText = del_status;
 				document.getElementById("balance").innerText = bala_d + " sol";
@@ -380,6 +381,7 @@ function showinfo(url, vote_key)
 				document.getElementById("will_done").innerText = will_done;
 				document.getElementById("skipped").innerText = skipped;
 				document.getElementById("skip").innerText = skip + " %";
+				document.getElementById("stake").innerText = stake + " sol";
 
 				if (typeof(next_slots[0]) != "undefined" && all > Done)
 				{
