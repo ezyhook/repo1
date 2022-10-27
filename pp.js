@@ -205,7 +205,7 @@ function showinfo(url, vote_key)
 				    let table1 = "";
 						for (let g = 0; g < 10; g++)
 						{
-							let item1 = "<tr><td id=r1_" + g + "></td><td id=r5_" + g + "></td><td id=r2_" + g + "></td><td id=r3_" + g + "></td><td id=r4_" + g + "></td></tr>";
+							let item1 = "<tr><td id=r1_" + g + "></td><td id=r2_" + g + "></td><td id=r3_" + g + "></td><td id=r4_" + g + "></td></tr>";
 							table1 += item1;
 						}
 						let outtable1 = "<table class=table><thead><th>Epoch</th><th>Commission</th><th>Rewards</th><th>Balance</th></tr></thead><tbody>" + table1 + "<th></th><th>Total:</th><th id=sumrew></th><th></th></tr></tbody></table>";
