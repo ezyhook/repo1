@@ -13,6 +13,7 @@ _input.addEventListener("change", () =>
 {
 	checkValidity(document.getElementById("key").value.replace(/\s/g, ""));
 });
+//---------------------------------------------------------------
 let _round = Math.round;
 Math.round = function(number, decimals /* optional, default 0 */ )
 {
@@ -193,38 +194,73 @@ function showinfo(url, vote_key)
 			})
 			.catch(function(error)
 			{
-				console.log("Error get data_time");
+				console.error(error);
 			});
 		//---------------------------------------------------------------
 		let rewards = getrec(data_slot, url).then(function(value)
 			{
 				let epoch = value.result.epoch;
-				let rew = [];
-
-				function foo(index)
-				{
-					let cu_epoch = epoch - index;
-					let data_reward = '{"jsonrpc": "2.0", "id": 1, "method": "getInflationReward", "params": [["' + vote_key + '"], {"epoch": ' + cu_epoch + '}]}';
-					let rew_in_epo = [];
-					return getrec(data_reward, url).then(function(value)
-					{
-						//setTimeout(() => {console.log("Delayed for 0.5 sec.");}, 500);
-						rew_in_epo.push(value.result[0].epoch);
-						rew_in_epo.push(value.result[0].commission);
-						rew_in_epo.push(value.result[0].amount);
-						rew_in_epo.push(value.result[0].postBalance);
-						return rew_in_epo;
-					});
+				function showrew(values) {
+				    let table1 = "";
+						for (let g = 0; g < 10; g++)
+						{
+							let item1 = "<tr><td id=r1_" + g + "></td><td id=r2_" + g + "></td><td id=r3_" + g + "></td><td id=r4_" + g + "></td></tr>";
+							table1 += item1;
+						}
+						let outtable1 = "<table class=table><thead><th>Epoch</th><th>Commission</th><th>Rewards</th><th>Balance</th></tr></thead><tbody>" + table1 + "<th></th><th>Total:</th><th id=sumrew></th><th></th></tr></tbody></table>";
+						document.write(outtable1);
+						sum_rew = 0;
+						for (let g = 0; g < 10; g++)
+						{
+							let ir1 = "r1_" + g;
+							let ir2 = "r2_" + g;
+							let ir3 = "r3_" + g;
+							let ir4 = "r4_" + g;
+							document.getElementById(ir1).innerText = values[g][0];
+							document.getElementById(ir2).innerText = values[g][1];
+							document.getElementById(ir3).innerText = values[g][2] / 1000000000;
+							document.getElementById(ir4).innerText = values[g][3] / 1000000000;
+							sum_rew += values[g][2] / 1000000000;
+						}
+						document.getElementById("sumrew").innerText = sum_rew;
 				}
-				for (let i = 1; i < 11; i++)
-				{
-					rew.push(foo(i));
+				
+				function getrewards() {
+				    let rew = [];
+				    function foo(index)
+            				{
+            					let cu_epoch = epoch - index;
+            					let data_reward = '{"jsonrpc": "2.0", "id": 1, "method": "getInflationReward", "params": [["' + vote_key + '"], {"epoch": ' + cu_epoch + '}]}';
+            					let rew_in_epo = [];
+            					let it = getrec(data_reward, url).then(function(value)
+            					{
+            						rew_in_epo.push(value.result[0].epoch);
+            						rew_in_epo.push(value.result[0].commission);
+            						rew_in_epo.push(value.result[0].amount);
+            						rew_in_epo.push(value.result[0].postBalance);
+            						return rew_in_epo;
+            					});
+            					return it;
+            				}
+            				for (let i = 1; i < 11; i++)
+            				{
+            					rew.push(foo(i));
+            				}
+            				Promise.all(rew).then(values => { setCookie(vote_key, JSON.stringify(values), {'max-age': 259200} ); });
+            				return rew;
 				}
-				return rew;
+				
+				if (typeof(getCookie(vote_key)) == "undefined") {
+				            Promise.all(getrewards()).then(values => {showrew(values);});
+				}
+				else if ((epoch - 1) !== getCookie(vote_key, true)[0][0]) {
+				            deleteCookie(vote_key);
+                            Promise.all(getrewards()).then(values => {showrew(values);});
+				} else {console.log("Good way"); return showrew(getCookie(vote_key, true)); }
 			})
 			.catch(function(error)
 			{
-				console.log("Error get cluster_slot");
+				console.error(error);
 			});
 		//---------------------------------------------------------------
 		let cluster_slot = getrec(data_slot, url).then(function(value)
@@ -258,7 +294,7 @@ function showinfo(url, vote_key)
 			}
 		}).catch(function(error)
 		{
-			console.log("Error get All_slots");
+			console.error(error);
 		});
 		//---------------------------------------------------------------
 		let bala = getrec(data_balance, url).then(function(value)
@@ -279,7 +315,7 @@ function showinfo(url, vote_key)
 			})
 			.catch(function(error)
 			{
-				console.log("Error get Balance");
+				console.error(error);
 			});
 		//---------------------------------------------------------------
 		let sdelal_blokov = getrec(data_BLOCKS_PRODUCTION_JSON, url).then(function(value)
@@ -297,40 +333,13 @@ function showinfo(url, vote_key)
 			})
 			.catch(function(error)
 			{
-				console.log("Error get sdelal_blokov");
+				console.error(error);
 			});
 		//---------------------------------------------------------------
 		Promise.all([time_const, cluster_slot, allt, sdelal_blokov, bala, rewards])
 			.then(values =>
 			{
-				const [time_const_d, cluster_slot_d1, allt_d, sdelal_blokov_d, bala_d, rewards_d] = values;
-				Promise.all(rewards_d)
-					.then(values =>
-					{
-						let table1 = "";
-						for (let g = 0; g < 10; g++)
-						{
-							let item1 = "<tr><td id=r1_" + g + "></td><td id=r2_" + g + "></td><td id=r3_" + g + "></td><td id=r4_" + g + "></td></tr>";
-							table1 += item1;
-						}
-						let outtable1 = "<table class=table><thead><th>Epoch</th><th>Commission</th><th>Rewards</th><th>Balance</th></tr></thead><tbody>" + table1 + "<th></th><th>Total:</th><th id=sumrew></th><th></th></tr></tbody></table>";
-						document.write(outtable1);
-						sum_rew = 0;
-						for (let g = 0; g < 10; g++)
-						{
-							let ir1 = "r1_" + g;
-							let ir2 = "r2_" + g;
-							let ir3 = "r3_" + g;
-							let ir4 = "r4_" + g;
-							document.getElementById(ir1).innerText = values[g][0];
-							document.getElementById(ir2).innerText = values[g][1];
-							document.getElementById(ir3).innerText = values[g][2] / 1000000000;
-							document.getElementById(ir4).innerText = values[g][3] / 1000000000;
-							sum_rew += values[g][2] / 1000000000;
-						}
-						document.getElementById("sumrew").innerText = sum_rew;
-					});
-
+				const [time_const_d, cluster_slot_d1, allt_d, sdelal_blokov_d, bala_d] = values;
 				let cluster_slot_d = cluster_slot_d1.result.slotIndex;
 				let end_slot_d = cluster_slot_d1.result.slotsInEpoch;
 				let Done, will_done, skipped, skip, all;
