@@ -294,7 +294,7 @@ function showinfo(url, vote_key)
 		{
 			try
 			{
-				if (Object.keys(value.result).length === 0)
+				if (Object.keys(value.result) == 0)
 				{
 					return 0;
 				}
