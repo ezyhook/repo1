@@ -340,7 +340,7 @@ function showinfo(url, vote_key)
 		let sdelal_blokov = getrec(data_BLOCKS_PRODUCTION_JSON, url).then(function(value)
 			{
 				let sdelal_bl;
-				if (typeof(value["result"]["value"]["byIdentity"][key][1]) == "undefined")
+				if (Object.keys(value["result"]["value"]["byIdentity"]) == 0)
 				{
 					sdelal_bl = 0;
 				}
