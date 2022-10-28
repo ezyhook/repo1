@@ -1,4 +1,4 @@
-/* © Un Sstrennen, 2020 * from https://github.com/UnSstrennen/cookie.js/
+/* © Un Sstrennen, 2020 * from https://github.com/UnSstrennen/cookie.js/ */
 
 function getCookie(name, json=false) {
   if (!name) {
