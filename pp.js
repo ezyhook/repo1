@@ -13,6 +13,7 @@ _input.addEventListener("change", () =>
 {
 	checkValidity(document.getElementById("key").value.replace(/\s/g, ""));
 });
+let timeZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
 //---------------------------------------------------------------
 let _round = Math.round;
 Math.round = function(number, decimals /* optional, default 0 */ )
@@ -167,7 +168,8 @@ function showinfo(url, vote_key)
 		let data_BLOCKS_PRODUCTION_JSON = '{"jsonrpc":"2.0","id":1, "method":"getBlockProduction", "params": [{ "identity": "' + key + '" }]}';
 		let data_time = '{"jsonrpc":"2.0", "id":1, "method":"getRecentPerformanceSamples", "params": [' + params_t + ']}';
 		let data_balance = '{"jsonrpc":"2.0", "id":1, "method":"getBalance", "params": ["' + key + '"]}';
-
+		let data_acc = '{"jsonrpc":"2.0","id": 1, "method":"getAccountInfo","params": ["' + key + '",{"encoding": "base58"}]}';
+		let data_version = '{"jsonrpc":"2.0","id":1, "method":"getVersion"}';
 		function echotime(secs)
 		{
 			let out = [];
@@ -272,6 +274,22 @@ function showinfo(url, vote_key)
 			{
 				console.log("Error get cluster_slot");
 			});
+		// let cl_ver = getrec(data_version, url).then(function(value)
+		// 	{
+		// 		return value;
+		// 	})
+		// 	.catch(function(error)
+		// 	{
+		// 		console.log("Error get cluster_slot");
+		// 	});
+		// let acc_ver = getrec(data_acc, url).then(function(value)
+		// 	{
+		// 		return value;
+		// 	})
+		// 	.catch(function(error)
+		// 	{
+		// 		console.log("Error get cluster_slot");
+		// 	});
 		let allt = getrec(data_next, url).then(function(value)
 		{
 			try
@@ -386,11 +404,13 @@ function showinfo(url, vote_key)
 				if (typeof(next_slots[0]) != "undefined" && all > Done)
 				{
 					let echo = [];
+					let techo = [];
 					let current_slot = next_slots[0];
 					let left_slot = current_slot - cluster_slot_d;
 					let secs = left_slot * time_const_d;
+					let secs_slot = Date.now()+secs*1000;
+					let normalDate = new Date(secs_slot).toLocaleString('ru-RU',{timeZone: timeZ});
 					echo = echotime(secs);
-
 					let echo_ = [];
 					for (let c = 0; c < will_done; c++)
 					{
@@ -399,44 +419,53 @@ function showinfo(url, vote_key)
 						if (secs1 >= 1)
 						{
 							echo_.push(echotime(secs1));
+							secs_slot += secs1*1000;
+							techo.push(secs_slot);
+							
 						}
 						current_slot = next_slots[c];
 					}
 					let echo_count = echo_.length;
 					let table = "";
+					let id1, id2, id3, id4, id5;
 					for (let d = 0; d < echo_count; d++)
 					{
-						let id1 = "t100" + d;
-						let id2 = "t200" + d;
-						let id3 = "t300" + d;
-						let id4 = "t400" + d;
-						let item = "<tr><td></td><td id=" + id1 + "></td><td id=" + id2 + "></td><td id=" + id3 + "></td><td id=" + id4 + "></td></tr>";
+						id1 = "t100" + d;
+						id2 = "t200" + d;
+						id3 = "t300" + d;
+						id4 = "t400" + d;
+						id5 = "t500" + d;
+						let item = "<tr><td id=" + id5 + "></td><td id=" + id1 + "></td><td id=" + id2 + "></td><td id=" + id3 + "></td><td id=" + id4 + "></td></tr>";
 						table += item;
 					}
-					let outtable = "<details class=link><summary>Time to next:</summary><table class=table><thead><tr><th>Time to next:</th><th>Days</th><th>Hours</th><th>Minutes</th><th>Seconds</th></tr></thead><tbody><tr><td></td><td id=echod></td><td id=echoh></td><td id=echom></td><td id=echos></td></tr>" + table + "</tbody></table></details>";
+					let outtable = "<details class=link><summary>Time to next:</summary><table class=table><thead><tr><th>Time to next:</th><th>Days</th><th>Hours</th><th>Minutes</th><th>Seconds</th></tr></thead><tbody><tr><td id=time></td><td id=echod></td><td id=echoh></td><td id=echom></td><td id=echos></td></tr>" + table + "</tbody></table></details>";
 					document.write(outtable);
 					document.getElementById("echod").innerText = echo[0];
 					document.getElementById("echoh").innerText = echo[1];
 					document.getElementById("echom").innerText = echo[2];
 					document.getElementById("echos").innerText = echo[3];
+					document.getElementById("time").innerText = normalDate;
 					for (let d = 0; d < echo_count; d++)
 					{
-						let id1 = "t100" + d;
-						let id2 = "t200" + d;
-						let id3 = "t300" + d;
-						let id4 = "t400" + d;
+						id1 = "t100" + d;
+						id2 = "t200" + d;
+						id3 = "t300" + d;
+						id4 = "t400" + d;
+						id5 = "t500" + d;
 						document.getElementById(id1).innerText = echo_[d][0];
 						document.getElementById(id2).innerText = echo_[d][1];
 						document.getElementById(id3).innerText = echo_[d][2];
 						document.getElementById(id4).innerText = echo_[d][3];
+						document.getElementById(id5).innerText = new Date(techo[d]).toLocaleString('ru-RU',{timeZone: timeZ});
 					}
 				}
 				else
 				{
 					let echo = [];
-					document.write("<table class=table><thead><tr><th>All slots Done. Time until the end of the epoch:</th><th>Days</th><th>Hours</th><th>Minutes</th><th>Seconds</th></tr></thead><tbody><tr><td></td><td id=echod></td><td id=echoh></td><td id=echom></td><td id=echos></td></tr></tbody></table>");
 					let secs_end_epoh = (end_slot_d - cluster_slot_d) * time_const_d;
 					echo = echotime(secs_end_epoh);
+					let t_end =  new Date(secs_end_epoh*1000).toLocaleString('ru-RU',{timeZone: timeZ});
+					document.write("<table class=table><thead><tr><th>All slots Done. Time until the end of the epoch:"+ t_end +"</th><th>Days</th><th>Hours</th><th>Minutes</th><th>Seconds</th></tr></thead><tbody><tr><td></td><td id=echod></td><td id=echoh></td><td id=echom></td><td id=echos></td></tr></tbody></table>");
 					document.getElementById("echod").innerText = echo[0];
 					document.getElementById("echoh").innerText = echo[1];
 					document.getElementById("echom").innerText = echo[2];
