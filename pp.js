@@ -465,11 +465,12 @@ function showinfo(url, vote_key)
 					let secs_end_epoh = (end_slot_d - cluster_slot_d) * time_const_d;
 					echo = echotime(secs_end_epoh);
 					let t_end =  new Date(secs_end_epoh*1000).toLocaleString('ru-RU',{timeZone: timeZ});
-					document.write("<table class=table><thead><tr><th>All slots Done. Time until the end of the epoch:"+ t_end +"</th><th>Days</th><th>Hours</th><th>Minutes</th><th>Seconds</th></tr></thead><tbody><tr><td></td><td id=echod></td><td id=echoh></td><td id=echom></td><td id=echos></td></tr></tbody></table>");
+					document.write("<table class=table><thead><tr><th>All slots Done. Time until the end of the epoch:</th><th>Days</th><th>Hours</th><th>Minutes</th><th>Seconds</th></tr></thead><tbody><tr><td id=tend></td><td id=echod></td><td id=echoh></td><td id=echom></td><td id=echos></td></tr></tbody></table>");
 					document.getElementById("echod").innerText = echo[0];
 					document.getElementById("echoh").innerText = echo[1];
 					document.getElementById("echom").innerText = echo[2];
 					document.getElementById("echos").innerText = echo[3];
+					document.getElementById("tend").innerText = t_end;
 				}
 			});
 	});
