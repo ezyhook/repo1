@@ -1,3 +1,23 @@
+@media screen and (max-width: 600px) {
+  body {
+    width: 100%;
+    }
+ .text-field__input {
+      width: 100%;
+        }
+}
+
+@media screen and (min-width: 600px) {
+  body {
+    width: 500px;
+    float: left;
+    margin-left: 40px;
+    margin-top: 30px;
+    }
+ .text-field__input {
+      width: 500px;
+        }
+}
 .form_radio_group {
 	display: inline-block;
 	overflow: hidden;
@@ -82,7 +102,6 @@
 
     .text-field__input {
       display: block;
-      width: 500px;
       height: calc(2.25rem + 2px);
       padding: 0.375rem 0.75rem;
       font-family: inherit;
