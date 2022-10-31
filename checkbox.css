@@ -1,22 +1,28 @@
 @media screen and (max-width: 600px) {
   body {
-    width: 100%;
-    }
+	width: 100%;
+    	}
  .text-field__input {
-      width: 100%;
+ 	width: 100%;
         }
+ .table {
+	width: 100%;
+	}
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 500px) {
   body {
-    width: 600px;
+    width: 500px;
     float: left;
     margin-left: 40px;
     margin-top: 30px;
     }
  .text-field__input {
-      width: 600px;
+	width: 500px;
         }
+ .table {
+	width: 500px;
+	}
 }
 .form_radio_group {
 	display: inline-block;
@@ -180,7 +186,6 @@
 
 
 .table {
-	width: 500px;
 	border: none;
 	margin-bottom: 20px;
 }
