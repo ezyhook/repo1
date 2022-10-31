@@ -10,7 +10,7 @@
 	}
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 600px) {
   body {
     width: 500px;
     float: left;
