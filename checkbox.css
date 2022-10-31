@@ -9,13 +9,13 @@
 
 @media screen and (min-width: 600px) {
   body {
-    width: 500px;
+    width: 600px;
     float: left;
     margin-left: 40px;
     margin-top: 30px;
     }
  .text-field__input {
-      width: 500px;
+      width: 600px;
         }
 }
 .form_radio_group {
