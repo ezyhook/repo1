@@ -219,13 +219,13 @@ function showinfo(url, vote_key)
 							let ir2 = "r2_" + g;
 							let ir3 = "r3_" + g;
 							let ir4 = "r4_" + g;
-							document.getElementById(ir1).innerText = values[g][0];
-							document.getElementById(ir2).innerText = values[g][1];
-							document.getElementById(ir3).innerText = values[g][2] / 1000000000;
-							document.getElementById(ir4).innerText = values[g][3] / 1000000000;
+							document.getElementById(ir1).innerHTML = values[g][0];
+							document.getElementById(ir2).innerHTML = values[g][1];
+							document.getElementById(ir3).innerHTML = values[g][2] / 1000000000;
+							document.getElementById(ir4).innerHTML = values[g][3] / 1000000000;
 							sum_rew += values[g][2] / 1000000000;
 						}
-						document.getElementById("sumrew").innerText = sum_rew;
+						document.getElementById("sumrew").innerHTML = sum_rew;
 				}
 				
 				function getrewards() {
@@ -392,14 +392,14 @@ function showinfo(url, vote_key)
 				}
 				let metrics = "<table class=table><thead><tr><th>Metrics</th><th>Value</th></tr></thead><tbody><tr><td>Delinquent status</td><td id=del class=" + del_status + "></td></tr><tr><td>Balance identity</td><td id=balance></td></tr><tr><td>Activated Stake</td><td id=stake></td></tr><tr><td>All blocks:</td><td id=all></td></tr><tr><td>Done blocks:</td><td id=Done></td></tr><tr><td>Will be done:</td><td id=will_done></td></tr><tr><td>Skipped blocks:</td><td id=skipped></td></tr><tr><td>Skip:</td><td id=skip></td></tr></tbody></table>";
 				document.write(metrics);
-				document.getElementById("del").innerText = del_status;
-				document.getElementById("balance").innerText = bala_d + " sol";
-				document.getElementById("all").innerText = all;
-				document.getElementById("Done").innerText = Done;
-				document.getElementById("will_done").innerText = will_done;
-				document.getElementById("skipped").innerText = skipped;
-				document.getElementById("skip").innerText = skip + " %";
-				document.getElementById("stake").innerText = stake + " sol";
+				document.getElementById("del").innerHTML = del_status;
+				document.getElementById("balance").innerHTML = bala_d + " sol";
+				document.getElementById("all").innerHTML = all;
+				document.getElementById("Done").innerHTML = Done;
+				document.getElementById("will_done").innerHTML = will_done;
+				document.getElementById("skipped").innerHTML = skipped;
+				document.getElementById("skip").innerHTML = skip + " %";
+				document.getElementById("stake").innerHTML = stake + " sol";
 
 				if (typeof(next_slots[0]) != "undefined" && all > Done)
 				{
@@ -440,11 +440,11 @@ function showinfo(url, vote_key)
 					}
 					let outtable = "<details class=link><summary>Time to next block:</summary><table class=table><thead><tr><th>Time to next block:</th><th>Days</th><th>Hours</th><th>Minutes</th><th>Seconds</th></tr></thead><tbody><tr><td id=time></td><td id=echod></td><td id=echoh></td><td id=echom></td><td id=echos></td></tr>" + table + "</tbody></table></details>";
 					document.write(outtable);
-					document.getElementById("echod").innerText = echo[0];
-					document.getElementById("echoh").innerText = echo[1];
-					document.getElementById("echom").innerText = echo[2];
-					document.getElementById("echos").innerText = echo[3];
-					document.getElementById("time").innerText = normalDate;
+					document.getElementById("echod").innerHTML = echo[0];
+					document.getElementById("echoh").innerHTML = echo[1];
+					document.getElementById("echom").innerHTML = echo[2];
+					document.getElementById("echos").innerHTML = echo[3];
+					document.getElementById("time").innerHTML = normalDate;
 					for (let d = 0; d < echo_count; d++)
 					{
 						id1 = "t100" + d;
@@ -452,11 +452,11 @@ function showinfo(url, vote_key)
 						id3 = "t300" + d;
 						id4 = "t400" + d;
 						id5 = "t500" + d;
-						document.getElementById(id1).innerText = echo_[d][0];
-						document.getElementById(id2).innerText = echo_[d][1];
-						document.getElementById(id3).innerText = echo_[d][2];
-						document.getElementById(id4).innerText = echo_[d][3];
-						document.getElementById(id5).innerText = new Date(techo[d]).toLocaleString('ru-RU',{timeZone: timeZ});
+						document.getElementById(id1).innerHTML = echo_[d][0];
+						document.getElementById(id2).innerHTML = echo_[d][1];
+						document.getElementById(id3).innerHTML = echo_[d][2];
+						document.getElementById(id4).innerHTML = echo_[d][3];
+						document.getElementById(id5).innerHTML = new Date(techo[d]).toLocaleString('ru-RU',{timeZone: timeZ});
 					}
 				}
 				else
@@ -467,11 +467,11 @@ function showinfo(url, vote_key)
 					let secs_slot = Date.now()+secs_end_epoh*1000;
 					let t_end =  new Date(secs_slot).toLocaleString('ru-RU',{timeZone: timeZ});
 					document.write("<table class=table><thead><tr><th>All slots Done. Time until the end of the epoch:</th><th>Days</th><th>Hours</th><th>Minutes</th><th>Seconds</th></tr></thead><tbody><tr><td id=tend></td><td id=echod></td><td id=echoh></td><td id=echom></td><td id=echos></td></tr></tbody></table>");
-					document.getElementById("echod").innerText = echo[0];
-					document.getElementById("echoh").innerText = echo[1];
-					document.getElementById("echom").innerText = echo[2];
-					document.getElementById("echos").innerText = echo[3];
-					document.getElementById("tend").innerText = t_end;
+					document.getElementById("echod").innerHTML = echo[0];
+					document.getElementById("echoh").innerHTML = echo[1];
+					document.getElementById("echom").innerHTML = echo[2];
+					document.getElementById("echos").innerHTML = echo[3];
+					document.getElementById("tend").innerHTML = t_end;
 				}
 			});
 	});
