@@ -159,7 +159,7 @@ function showinfo(url, vote_key)
 		else if (value["result"]["delinquent"].length != 0)
 		{
 			key = value["result"]["delinquent"][0]["nodePubkey"];
-			stake = value["result"]["current"][0]["activatedStake"]/1000000000;
+			stake = value["result"]["delinquent"][0]["activatedStake"]/1000000000;
 			del_status = true;
 		}
 		const params_t = 5;
