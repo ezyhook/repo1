@@ -1,19 +1,40 @@
+writeHTML = function(divIN, el, classOP, idOP, s)
+	{
+	    if (divIN == "body") {
+	        let z = document.createElement(el);
+	        z.className = classOP;
+            z.id = idOP;
+            z.innerHTML = s;
+            document.body.appendChild(z);
+	    } else {
+            let z = document.createElement(el);
+            z.className = classOP;
+            z.id = idOP;
+            z.innerHTML = s;
+            document.getElementById(divIN).appendChild(z);
+	    }
+	};
+let mainDIV = "<div class=row id=main_row></div>";
+writeHTML ("body", "div", "tab", null, mainDIV);
+//---------------------------------------------------------------
+
 let _radio1 = document.getElementById('radio-1');
 _radio1.addEventListener("change", () =>
 {
-	checkValidity(document.getElementById("key").value.replace(/\s/g, ""));
+	checkValidity();
 });
 let _radio2 = document.getElementById('radio-2');
 _radio2.addEventListener("change", () =>
 {
-	checkValidity(document.getElementById("key").value.replace(/\s/g, ""));
+	checkValidity();
 });
 let _input = document.getElementById('key');
 _input.addEventListener("change", () =>
 {
-	checkValidity(document.getElementById("key").value.replace(/\s/g, ""));
+	checkValidity();
 });
 let timeZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
 //---------------------------------------------------------------
 let _round = Math.round;
 Math.round = function(number, decimals /* optional, default 0 */ )
@@ -25,12 +46,6 @@ Math.round = function(number, decimals /* optional, default 0 */ )
 	let multiplier = Math.pow(10, decimals);
 	return _round(number * multiplier) / multiplier;
 };
-document.write = function(s)
-	{
-		let scripts = document.getElementsByTagName('script');
-		let lastScript = scripts[scripts.length - 1];
-		lastScript.insertAdjacentHTML("beforebegin", s);
-	};
 //---------------------------------------------------------------
 async function getrec(data, url)
 {
@@ -55,99 +70,104 @@ async function getrec(data, url)
 	}
 }
 //---------------------------------------------------------------
-function checkValidity(val_key)
+function checkValidity()
 {
 	const radio1 = document.getElementById('radio-1');
 	const radio2 = document.getElementById('radio-2');
 	const input = document.getElementById('key');
+	const val_key = input.value.replace(/\s/g, "");
+  
+    	if (input.value == "")
+    	{
+    	    input.classList.remove('text-field__input_invalid');
+    		input.classList.remove('text-field__input_valid');
+    		input.nextElementSibling.textContent = 'Input is empty';
+    	} else if (document.getElementById(val_key) == null) {
 
-	if (val_key === "")
-	{
-		input.nextElementSibling.textContent = 'Input is empty';
-	}
-	else
-	{
-		let val_url;
-		if (radio1.checked)
-		{
-			val_url = "https://api.testnet.solana.com";
-		}
-		else if (radio2.checked)
-		{
-			val_url = "https://api.mainnet-beta.solana.com";
-		}
-		let data_voteinfo = '{"jsonrpc":"2.0", "id": 1, "method":"getVoteAccounts", "params": [{"votePubkey":"' + val_key + '"}]}';
-		getrec(data_voteinfo, val_url)
-			.then(function(value)
-			{
-				let pubkey;
-				if (typeof(value["result"]["current"][0]) == "undefined")
-				{
-					pubkey = value["result"]["delinquent"][0]["nodePubkey"].length;
-				}
-				else if (typeof(value["result"]["delinquent"][0]) == "undefined")
-				{
-					pubkey = value["result"]["current"][0]["nodePubkey"].length;
-				}
-				try
-				{
-					if (pubkey > 0)
-					{
-						input.classList.remove('text-field__input_invalid');
-						input.classList.add('text-field__input_valid');
-						input.nextElementSibling.textContent = 'Valid';
-						sendForm();
-					}
-					/**else
-					{
-						input.classList.remove('text-field__input_valid');
-						input.classList.add('text-field__input_invalid');
-						input.nextElementSibling.textContent = 'Not valid';
-					}*/
-				}
-				catch (err)
-				{
-					if (value.error.code == "-32602")
-					{
-						input.classList.remove('text-field__input_valid');
-						input.classList.add('text-field__input_invalid');
-						input.nextElementSibling.textContent = 'Not valid';
-					}
-				}
-
-			})
-			.catch(function(error)
-			{
-				input.classList.remove('text-field__input_valid');
-				input.classList.add('text-field__input_invalid');
-				input.nextElementSibling.textContent = 'Not valid';
-				alert("Pub-key is not valid");
-				location.reload();
-			});
-	}
-}
-//---------------------------------------------------------------
-function sendForm()
-{
-	let val_url;
-	if (document.getElementById('radio-1').checked)
-	{
-		//val_url = "https://api.testnet.solana.com";
-		val_url = "https://fittest-serene-liquid.solana-testnet.discover.quiknode.pro/f3e2b1ac3303a0b16938af9fe8985c15310c02e8/";
-	}
-	else if (document.getElementById('radio-2').checked)
-	{
-		val_url = "https://api.mainnet-beta.solana.com";
-		//val_url = "https://quaint-frequent-smoke.solana-mainnet.discover.quiknode.pro/c62fc1839a7f9a8e955f3f5783b7de773dca4b72/";
-	}
-	let val_key = document.getElementById("key").value.replace(/\s/g, "");
-	showinfo(val_url, val_key);
+    		let val_url;
+    		if (radio1.checked)
+    		{
+    			//val_url = "https://api.testnet.solana.com";
+    			val_url = "https://fittest-serene-liquid.solana-testnet.discover.quiknode.pro/f3e2b1ac3303a0b16938af9fe8985c15310c02e8/";
+    		}
+    		else if (radio2.checked)
+    		{
+    			val_url = "https://api.mainnet-beta.solana.com";
+    		}
+    		let data_voteinfo = '{"jsonrpc":"2.0", "id": 1, "method":"getVoteAccounts", "params": [{"votePubkey":"' + val_key + '"}]}';
+    		getrec(data_voteinfo, val_url)
+    			.then(function(value)
+    			{
+    			    if (typeof(value["result"]) == "undefined") {
+    			        input.classList.remove('text-field__input_valid');
+    				    input.classList.add('text-field__input_invalid');
+    				    input.nextElementSibling.textContent = 'Not valid';
+    			    } else {
+        				let pubkey;
+        				if (value["result"]["current"].length !== 0)
+        				{
+        					pubkey = value["result"]["current"][0]["nodePubkey"].length;
+        					input.classList.remove('text-field__input_invalid');
+        					input.classList.add('text-field__input_valid');
+        					input.nextElementSibling.textContent = 'Pub-key is valid."';
+        					//input.addEventListener("keypress", function(event) {
+                            //   if (event.key === "Enter") {
+                            //       event.preventDefault();
+                            //       checkValidity();
+                            showinfo(val_url, val_key);
+                            input.value = "";
+                            checkValidity();
+                            //   }
+    						//});
+        				}
+        				else if (value["result"]["delinquent"].length !== 0)
+        				{
+        					pubkey = value["result"]["delinquent"][0]["nodePubkey"].length;
+        					input.classList.remove('text-field__input_invalid');
+        					input.classList.add('text-field__input_valid');
+        					input.nextElementSibling.textContent = 'Pub-key is valid."';
+        					//input.addEventListener("keypress", function(event) {
+                            //   if (event.key === "Enter") {
+                            //       event.preventDefault();
+                            //       checkValidity();
+                            showinfo(val_url, val_key);
+                            input.value = "";
+                            checkValidity();
+                            //   }
+                            //});
+        				}
+        				else
+        				{
+        				    input.classList.remove('text-field__input_valid');
+    				        input.classList.add('text-field__input_invalid');
+    				        input.nextElementSibling.textContent = 'Not valid';
+        				}
+    			    }
+    
+    			})
+    			.catch(function(error)
+    			{
+    				input.classList.remove('text-field__input_valid');
+    				input.classList.add('text-field__input_invalid');
+    				input.nextElementSibling.textContent = 'Not valid';
+    				//alert("Pub-key is not valid");
+    				//location.reload();
+    			});
+    	} else {
+        input.classList.remove('text-field__input_invalid');
+    	input.classList.remove('text-field__input_valid');
+    	input.nextElementSibling.textContent = 'Info on display!!!';
+    }
 }
 //---------------------------------------------------------------
 function showinfo(url, vote_key)
 {
-	let data_voteinfo = '{"jsonrpc": "2.0", "id": 1, "method": "getVoteAccounts", "params": [{"votePubkey": "' + vote_key + '"}]}';
-	getrec(data_voteinfo, url).then(function(value)
+    let netw;
+    if (url == "https://fittest-serene-liquid.solana-testnet.discover.quiknode.pro/f3e2b1ac3303a0b16938af9fe8985c15310c02e8/") { netw = "TEST: ";} else { netw = "MAIN: ";}
+    let cellDIV = "<table><thead><th>" + netw + vote_key + "</th></thead></table><div id=rew_tab"+ vote_key +"></div><div id=info_tab"+ vote_key +"></div>";
+    writeHTML ("main_row", "div", "cell", vote_key, cellDIV);
+    let data_voteinfo = '{"jsonrpc": "2.0", "id": 1, "method": "getVoteAccounts", "params": [{"votePubkey": "' + vote_key + '"}]}';
+	  getrec(data_voteinfo, url).then(function(value)
 	{
 		let key, del_status, stake;
 		if (value["result"]["current"].length != 0)
@@ -207,25 +227,25 @@ function showinfo(url, vote_key)
 				    let table1 = "";
 						for (let g = 0; g < 10; g++)
 						{
-							let item1 = "<tr><td id=r1_" + g + "></td><td id=r2_" + g + "></td><td id=r3_" + g + "></td><td id=r4_" + g + "></td></tr>";
+							let item1 = "<tr><td id="+ vote_key +"r1_" + g + "></td><td id="+ vote_key +"r2_" + g + "></td><td id="+ vote_key +"r3_" + g + "></td><td id="+ vote_key +"r4_" + g + "></td></tr>";
 							table1 += item1;
 						}
-						let outtable1 = "<table class=table><thead><th>Epoch</th><th>Commission</th><th>Rewards</th><th>Balance</th></tr></thead><tbody>" + table1 + "<th></th><th>Total:</th><th id=sumrew></th><th></th></tr></tbody></table>";
-						document.write(outtable1);
+						let outtable1 = "<thead><th>Epoch</th><th>Commission</th><th>Rewards</th><th>Balance</th></tr></thead><tbody>" + table1 + "<th></th><th>Total:</th><th id=sumrew"+ vote_key +"></th><th></th></tr></tbody>";
+						writeHTML("rew_tab" + vote_key, "table", "table", "rew"+ vote_key, outtable1);
 						sum_rew = 0;
 						for (let g = 0; g < 10; g++)
 						{
-							let ir1 = "r1_" + g;
-							let ir2 = "r2_" + g;
-							let ir3 = "r3_" + g;
-							let ir4 = "r4_" + g;
+							let ir1 = vote_key + "r1_" + g;
+							let ir2 = vote_key + "r2_" + g;
+							let ir3 = vote_key + "r3_" + g;
+							let ir4 = vote_key + "r4_" + g;
 							document.getElementById(ir1).innerHTML = values[g][0];
 							document.getElementById(ir2).innerHTML = values[g][1];
 							document.getElementById(ir3).innerHTML = values[g][2] / 1000000000;
 							document.getElementById(ir4).innerHTML = values[g][3] / 1000000000;
 							sum_rew += values[g][2] / 1000000000;
 						}
-						document.getElementById("sumrew").innerHTML = sum_rew;
+						document.getElementById("sumrew" + vote_key).innerHTML = sum_rew;
 				}
 				
 				function getrewards() {
@@ -259,7 +279,7 @@ function showinfo(url, vote_key)
 				else if ((epoch - 1) !== getCookie(vote_key, true)[0][0]) {
 				            deleteCookie(vote_key);
                             Promise.all(getrewards()).then(values => {showrew(values);});
-				} else {console.log("Good way"); return showrew(getCookie(vote_key, true)); }
+				} else {return showrew(getCookie(vote_key, true)); }
 			})
 			.catch(function(error)
 			{
@@ -390,17 +410,16 @@ function showinfo(url, vote_key)
 					    skip = Math.round((skipped * 100 / Done), 2);
 				    }
 				}
-				let metrics = "<table class=table><thead><tr><th>Metrics</th><th>Value</th></tr></thead><tbody><tr><td>Delinquent status</td><td id=del class=" + del_status + "></td></tr><tr><td>Balance identity</td><td id=balance></td></tr><tr><td>Activated Stake</td><td id=stake></td></tr><tr><td>All blocks:</td><td id=all></td></tr><tr><td>Done blocks:</td><td id=Done></td></tr><tr><td>Will be done:</td><td id=will_done></td></tr><tr><td>Skipped blocks:</td><td id=skipped></td></tr><tr><td>Skip:</td><td id=skip></td></tr></tbody></table>";
-				document.write(metrics);
-				document.getElementById("del").innerHTML = del_status;
-				document.getElementById("balance").innerHTML = bala_d + " sol";
-				document.getElementById("all").innerHTML = all;
-				document.getElementById("Done").innerHTML = Done;
-				document.getElementById("will_done").innerHTML = will_done;
-				document.getElementById("skipped").innerHTML = skipped;
-				document.getElementById("skip").innerHTML = skip + " %";
-				document.getElementById("stake").innerHTML = stake + " sol";
-
+				let metrics = "<thead><tr><th>Metrics</th><th>Value</th></tr></thead><tbody><tr><td>Delinquent status</td><td id=del"+ vote_key + " class=" + del_status + "></td></tr><tr><td>Balance identity</td><td id=balance"+ vote_key + "></td></tr><tr><td>Activated Stake</td><td id=stake"+ vote_key + "></td></tr><tr><td>All blocks:</td><td id=all"+ vote_key + "></td></tr><tr><td>Done blocks:</td><td id=Done"+ vote_key + "></td></tr><tr><td>Will be done:</td><td id=will_done"+ vote_key + "></td></tr><tr><td>Skipped blocks:</td><td id=skipped"+ vote_key + "></td></tr><tr><td>Skip:</td><td id=skip"+ vote_key + "></td></tr></tbody>";
+				writeHTML("info_tab" + vote_key, "table", "table", "metrics" + vote_key, metrics);
+				document.getElementById("del"+ vote_key).innerHTML = del_status;
+				document.getElementById("balance"+ vote_key).innerHTML = bala_d + " sol";
+				document.getElementById("all"+ vote_key).innerHTML = all;
+				document.getElementById("Done"+ vote_key).innerHTML = Done;
+				document.getElementById("will_done"+ vote_key).innerHTML = will_done;
+				document.getElementById("skipped"+ vote_key).innerHTML = skipped;
+				document.getElementById("skip"+ vote_key).innerHTML = skip + " %";
+				document.getElementById("stake"+ vote_key).innerHTML = stake + " sol";
 				if (typeof(next_slots[0]) != "undefined" && all > Done)
 				{
 					let echo = [];
@@ -430,28 +449,28 @@ function showinfo(url, vote_key)
 					let id1, id2, id3, id4, id5;
 					for (let d = 0; d < echo_count; d++)
 					{
-						id1 = "t100" + d;
-						id2 = "t200" + d;
-						id3 = "t300" + d;
-						id4 = "t400" + d;
-						id5 = "t500" + d;
+						id1 = vote_key + "t100" + d;
+						id2 = vote_key + "t200" + d;
+						id3 = vote_key + "t300" + d;
+						id4 = vote_key + "t400" + d;
+						id5 = vote_key + "t500" + d;
 						let item = "<tr><td id=" + id5 + "></td><td id=" + id1 + "></td><td id=" + id2 + "></td><td id=" + id3 + "></td><td id=" + id4 + "></td></tr>";
 						table += item;
 					}
-					let outtable = "<details class=link><summary>Time to next block:</summary><table class=table><thead><tr><th>Time to next block:</th><th>Days</th><th>Hours</th><th>Minutes</th><th>Seconds</th></tr></thead><tbody><tr><td id=time></td><td id=echod></td><td id=echoh></td><td id=echom></td><td id=echos></td></tr>" + table + "</tbody></table></details>";
-					document.write(outtable);
-					document.getElementById("echod").innerHTML = echo[0];
-					document.getElementById("echoh").innerHTML = echo[1];
-					document.getElementById("echom").innerHTML = echo[2];
-					document.getElementById("echos").innerHTML = echo[3];
-					document.getElementById("time").innerHTML = normalDate;
+					let outtable = "<summary>Time to next:</summary><table class=table><thead><tr><th>Time to next:</th><th>Days</th><th>Hours</th><th>Minutes</th><th>Seconds</th></tr></thead><tbody><tr><td id=time"+ vote_key + "></td><td id=echod"+ vote_key + "></td><td id=echoh"+ vote_key + "></td><td id=echom"+ vote_key + "></td><td id=echos"+ vote_key + "></td></tr>" + table + "</tbody></table>";
+					writeHTML("info_tab"+ vote_key, "details", "link", "t" + vote_key, outtable);
+					document.getElementById("echod"+ vote_key).innerHTML = echo[0];
+					document.getElementById("echoh"+ vote_key).innerHTML = echo[1];
+					document.getElementById("echom"+ vote_key).innerHTML = echo[2];
+					document.getElementById("echos"+ vote_key).innerHTML = echo[3];
+					document.getElementById("time"+ vote_key).innerHTML = normalDate;
 					for (let d = 0; d < echo_count; d++)
 					{
-						id1 = "t100" + d;
-						id2 = "t200" + d;
-						id3 = "t300" + d;
-						id4 = "t400" + d;
-						id5 = "t500" + d;
+						id1 = vote_key + "t100" + d;
+						id2 = vote_key + "t200" + d;
+						id3 = vote_key + "t300" + d;
+						id4 = vote_key + "t400" + d;
+						id5 = vote_key + "t500" + d;
 						document.getElementById(id1).innerHTML = echo_[d][0];
 						document.getElementById(id2).innerHTML = echo_[d][1];
 						document.getElementById(id3).innerHTML = echo_[d][2];
@@ -466,13 +485,15 @@ function showinfo(url, vote_key)
 					echo = echotime(secs_end_epoh);
 					let secs_slot = Date.now()+secs_end_epoh*1000;
 					let t_end =  new Date(secs_slot).toLocaleString('ru-RU',{timeZone: timeZ});
-					document.write("<table class=table><thead><tr><th>All slots Done. Time until the end of the epoch:</th><th>Days</th><th>Hours</th><th>Minutes</th><th>Seconds</th></tr></thead><tbody><tr><td id=tend></td><td id=echod></td><td id=echoh></td><td id=echom></td><td id=echos></td></tr></tbody></table>");
-					document.getElementById("echod").innerHTML = echo[0];
-					document.getElementById("echoh").innerHTML = echo[1];
-					document.getElementById("echom").innerHTML = echo[2];
-					document.getElementById("echos").innerHTML = echo[3];
-					document.getElementById("tend").innerHTML = t_end;
+					writeHTML("info_tab" + vote_key, "table", "table", "end" + vote_key, "<thead><tr><th>All slots Done. Time until the end of the epoch:</th><th>Days</th><th>Hours</th><th>Minutes</th><th>Seconds</th></tr></thead><tbody><tr><td id=tend" + vote_key + "></td><td id=echod" + vote_key + "></td><td id=echoh" + vote_key + "></td><td id=echom" + vote_key + "></td><td id=echos" + vote_key + "></td></tr></tbody>");
+					document.getElementById("echod" + vote_key).innerHTML = echo[0];
+					document.getElementById("echoh" + vote_key).innerHTML = echo[1];
+					document.getElementById("echom" + vote_key).innerHTML = echo[2];
+					document.getElementById("echos" + vote_key).innerHTML = echo[3];
+					document.getElementById("tend" + vote_key).innerHTML = t_end;
 				}
 			});
 	});
+
+   
 }
