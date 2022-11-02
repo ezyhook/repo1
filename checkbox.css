@@ -1,6 +1,6 @@
 @media screen and (max-width: 600px) {
   body {
-	width: 100%;
+	width: 90%;
     	}
  .text-field__input {
  	width: 100%;
@@ -8,14 +8,14 @@
  .table {
 	width: 100%;
 	}
+	details {
+	  width: 100%;
+	}
 }
 
 @media screen and (min-width: 600px) {
   body {
-    width: 500px;
-    float: left;
-    margin-left: 40px;
-    margin-top: 30px;
+    width: 90%;
     }
  .text-field__input {
 	width: 500px;
@@ -23,6 +23,32 @@
  .table {
 	width: 500px;
 	}
+	details {
+	  width: 500px;
+	}
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 2.5px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+.tab{
+     display: table;
+}
+.row {
+     display: table-row;
+}
+.cell {
+     display: table-cell;
+     left: 0;
+     /*float: left;
+     margin-right: 3px;*/
+}
+.form {
+    float: left;
 }
 .form_radio_group {
 	display: inline-block;
@@ -76,7 +102,7 @@
     }
 
     body {
-      margin: 0;
+      margin: 10px 10px 10px 10px ;
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
       font-size: 1rem;
       font-weight: 400;
@@ -168,7 +194,7 @@
     }
 
     .text-field__message {
-      display: none;
+      /*display: none;*/
       width: 100%;
       margin-top: .25rem;
       font-size: .875rem;
@@ -183,7 +209,6 @@
     .text-field__input_valid~.text-field__message {
       display: block;
     }
-
 
 .table {
 	border: none;
@@ -228,7 +253,6 @@
 details{
   display:block;
   background: #fff;
-  width: 500px;
   height: 100%;
   box-shadow: 0 10px 15px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   border-radius: 8px;
