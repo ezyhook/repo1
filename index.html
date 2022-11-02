@@ -7,22 +7,24 @@
 <script src="cookie.js"></script>
 </head>
 <body>
-<div class="form_radio_group">
-	<div class="form_radio_group-item">
-		<input name="radio" id="radio-1" type="radio" value="1" checked>
-		<label for="radio-1"> Testnet </label>
-	</div>
-	<div class="form_radio_group-item">
-		<input name="radio"  id="radio-2" type="radio" value="2">
-		<label for="radio-2"> Mainnet </label>
-	</div>
-</div>	
-
-<div class="text-field">
-  <label class="text-field__label" for="username">Vote Account PUB-key</label>
-  <input class="text-field__input" type="text" name="key" id="key">
-  <div class="text-field__message">PUB-key vailed</div>
+<div id="form">
+    <div class="form_radio_group">
+	    <div class="form_radio_group-item">
+		    <input name="radio" id="radio-1" type="radio" value="1" checked>
+		    <label for="radio-1"> Testnet </label>
+    	</div>
+    	<div class="form_radio_group-item">
+    		<input name="radio"  id="radio-2" type="radio" value="2">
+    		<label for="radio-2"> Mainnet </label>
+    	</div>
+    </div>	
+    <div class="text-field">
+        <label class="text-field__label" for="username">Vote Account PUB-key</label>
+        <input class="text-field__input" type="text" name="key" id="key">
+        <div class="text-field__message"></div>
+    </div>
 </div>
+<hr>
 <script src="pp.js" type="text/javascript" defer></script>
 </body>
 </html>
