@@ -87,8 +87,8 @@ function checkValidity()
     		let val_url;
     		if (radio1.checked)
     		{
-    			//val_url = "https://api.testnet.solana.com";
-    			val_url = "https://fittest-serene-liquid.solana-testnet.discover.quiknode.pro/f3e2b1ac3303a0b16938af9fe8985c15310c02e8/";
+    			val_url = "https://api.testnet.solana.com";
+    			//val_url = "https://fittest-serene-liquid.solana-testnet.discover.quiknode.pro/f3e2b1ac3303a0b16938af9fe8985c15310c02e8/";
     		}
     		else if (radio2.checked)
     		{
