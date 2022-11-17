@@ -1,3 +1,6 @@
+let rpc_test1 = "https://api.testnet.solana.com";
+let rpc_test2 = "https://fittest-serene-liquid.solana-testnet.discover.quiknode.pro/f3e2b1ac3303a0b16938af9fe8985c15310c02e8/";
+let rpc_main = "https://api.mainnet-beta.solana.com";
 writeHTML = function(divIN, el, classOP, idOP, s)
 	{
 	    if (divIN == "body") {
@@ -87,12 +90,11 @@ function checkValidity()
     		let val_url;
     		if (radio1.checked)
     		{
-    			val_url = "https://api.testnet.solana.com";
-    			//val_url = "https://fittest-serene-liquid.solana-testnet.discover.quiknode.pro/f3e2b1ac3303a0b16938af9fe8985c15310c02e8/";
+    			val_url = rpc_test1;
     		}
     		else if (radio2.checked)
     		{
-    			val_url = "https://api.mainnet-beta.solana.com";
+    			val_url = rpc_main;
     		}
     		let data_voteinfo = '{"jsonrpc":"2.0", "id": 1, "method":"getVoteAccounts", "params": [{"votePubkey":"' + val_key + '"}]}';
     		getrec(data_voteinfo, val_url)
@@ -163,7 +165,7 @@ function checkValidity()
 function showinfo(url, vote_key)
 {
     let netw;
-    if (url == "https://fittest-serene-liquid.solana-testnet.discover.quiknode.pro/f3e2b1ac3303a0b16938af9fe8985c15310c02e8/") { netw = "TEST: ";} else { netw = "MAIN: ";}
+    if (url == rpc_main ) { netw = "MAIN: ";} else { netw = "TEST: ";}
     let cellDIV = "<table><thead><th>" + netw + vote_key + "</th></thead></table><div id=rew_tab"+ vote_key +"></div><div id=info_tab"+ vote_key +"></div>";
     writeHTML ("main_row", "div", "cell", vote_key, cellDIV);
     let data_voteinfo = '{"jsonrpc": "2.0", "id": 1, "method": "getVoteAccounts", "params": [{"votePubkey": "' + vote_key + '"}]}';
