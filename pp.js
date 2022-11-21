@@ -259,11 +259,18 @@ function showinfo(url, vote_key)
             					let rew_in_epo = [];
             					let it = getrec(data_reward, url).then(function(value)
             					{
-            						rew_in_epo.push(value.result[0].epoch);
-            						rew_in_epo.push(value.result[0].commission);
-            						rew_in_epo.push(value.result[0].amount);
-            						rew_in_epo.push(value.result[0].postBalance);
-            						return rew_in_epo;
+            						rew_in_epo.push(cu_epoch);
+            						if (value.result[0] == null)
+				                    	{ 
+				                        	rew_in_epo.push(0);
+				                        	rew_in_epo.push(0);
+				                        	rew_in_epo.push(0);
+				                    	} else {
+            						    	rew_in_epo.push(value.result[0].commission);
+            						    	rew_in_epo.push(value.result[0].amount);
+            						    	rew_in_epo.push(value.result[0].postBalance);
+            					    	}
+            					    	return rew_in_epo;
             					});
             					return it;
             				}
