@@ -1,5 +1,5 @@
 let rpc_test1 = "https://api.testnet.solana.com";
-let rpc_test2 = "https://fittest-serene-liquid.solana-testnet.discover.quiknode.pro/f3e2b1ac3303a0b16938af9fe8985c15310c02e8/";
+let rpc_test = "https://fittest-serene-liquid.solana-testnet.discover.quiknode.pro/f3e2b1ac3303a0b16938af9fe8985c15310c02e8/";
 let rpc_main = "https://api.mainnet-beta.solana.com";
 writeHTML = function(divIN, el, classOP, idOP, s)
 	{
@@ -90,7 +90,7 @@ function checkValidity()
     		let val_url;
     		if (radio1.checked)
     		{
-    			val_url = rpc_test1;
+    			val_url = rpc_test;
     		}
     		else if (radio2.checked)
     		{
