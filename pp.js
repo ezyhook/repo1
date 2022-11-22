@@ -466,7 +466,9 @@ function showinfo(url, vote_key)
 						let item = "<tr><td id=" + id5 + "></td><td id=" + id1 + "></td><td id=" + id2 + "></td><td id=" + id3 + "></td><td id=" + id4 + "></td></tr>";
 						table += item;
 					}
-					let outtable = "<summary>Time to next:</summary><table class=table><thead><tr><th>Time to next:</th><th>Days</th><th>Hours</th><th>Minutes</th><th>Seconds</th></tr></thead><tbody><tr><td id=time"+ vote_key + "></td><td id=echod"+ vote_key + "></td><td id=echoh"+ vote_key + "></td><td id=echom"+ vote_key + "></td><td id=echos"+ vote_key + "></td></tr>" + table + "</tbody></table>";
+					let outtable1 = "<summary>Time to next:</summary><table class=table><thead><tr><th>Time to next:</th><th>Days</th><th>Hours</th><th>Minutes</th><th>Seconds</th></tr></thead><tbody><tr><td id=time"+ vote_key + "></td><td id=echod"+ vote_key + "></td><td id=echoh"+ vote_key + "></td><td id=echom"+ vote_key + "></td><td id=echos"+ vote_key + "></td></tr>";
+					let endtab1 ="<tr><th id=tend" + vote_key + "></th><th id=eechod" + vote_key + "></th><th id=eechoh" + vote_key + "></th><th id=eechom" + vote_key + "></th><th id=eechos" + vote_key + "></th></tr></tbody></table>";
+                    			let outtable = outtable1 + table + endtab1;
 					writeHTML("info_tab"+ vote_key, "details", "link", "t" + vote_key, outtable);
 					document.getElementById("echod"+ vote_key).innerHTML = echo[0];
 					document.getElementById("echoh"+ vote_key).innerHTML = echo[1];
@@ -486,6 +488,16 @@ function showinfo(url, vote_key)
 						document.getElementById(id4).innerHTML = echo_[d][3];
 						document.getElementById(id5).innerHTML = new Date(techo[d]).toLocaleString('ru-RU',{timeZone: timeZ});
 					}
+					let echoe = [];
+					let secs_end_epoh = (end_slot_d - cluster_slot_d) * time_const_d;
+					echoe = echotime(secs_end_epoh);
+					let secs_slot_end = Date.now()+secs_end_epoh*1000;
+					let t_end =  new Date(secs_slot_end).toLocaleString('ru-RU',{timeZone: timeZ});
+					document.getElementById("eechod" + vote_key).innerHTML = echoe[0];
+					document.getElementById("eechoh" + vote_key).innerHTML = echoe[1];
+					document.getElementById("eechom" + vote_key).innerHTML = echoe[2];
+					document.getElementById("eechos" + vote_key).innerHTML = echoe[3];
+					document.getElementById("tend" + vote_key).innerHTML = "End of epoch: " + t_end;
 				}
 				else
 				{
