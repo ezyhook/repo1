@@ -54,7 +54,6 @@ async function getrec(data, url)
 {
 	const response = await fetch(url,
 	{
-		mode: 'no-cors',
 		method: 'POST',
 		headers:
 		{
