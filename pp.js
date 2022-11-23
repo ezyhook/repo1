@@ -59,6 +59,7 @@ async function getrec(data, url)
 		{
 			'Accept': 'application/json',
 			'Content-Type': 'application/json'
+			'Access-Control-Allow-Origin': '*'
 		},
 		body: data
 	});
