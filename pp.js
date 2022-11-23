@@ -60,7 +60,7 @@ async function getrec(data, url)
 			'Accept': 'application/json',
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(data)
+		body: data
 	});
 	if (response.ok)
 	{
