@@ -58,7 +58,7 @@ async function getrec(data, url)
 		headers:
 		{
 			'Accept': 'application/json',
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': '*'
 		},
 		body: data
