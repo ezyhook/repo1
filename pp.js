@@ -60,7 +60,10 @@ async function getrec(data, url)
 		headers:
 		{
 			'Accept': 'application/json',
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			'Origin': 'https://repo1-two.vercel.app/',
+			'Access-Control-Request-Method': 'POST, GET, OPTIONS'
+			
 		},
 		body: data
 	});
