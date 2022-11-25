@@ -20,25 +20,7 @@ writeHTML = function(divIN, el, classOP, idOP, s)
 	};
 let mainDIV = "<div class=row id=main_row></div>";
 writeHTML ("body", "div", "tab", null, mainDIV);
-//---------------------------------------------------------------
-
-let _radio1 = document.getElementById('radio-1');
-_radio1.addEventListener("change", () =>
-{
-	checkValidity();
-});
-let _radio2 = document.getElementById('radio-2');
-_radio2.addEventListener("change", () =>
-{
-	checkValidity();
-});
-let _input = document.getElementById('key');
-_input.addEventListener("change", () =>
-{
-	checkValidity();
-});
 let timeZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
 //---------------------------------------------------------------
 let _round = Math.round;
 Math.round = function(number, decimals /* optional, default 0 */ )
