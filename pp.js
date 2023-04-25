@@ -243,8 +243,9 @@ function showinfo(url, vote_key)
             					let rew_in_epo = [];
             					let it = getrec(data_reward, url).then(function(value)
             					{
+									try {
             						rew_in_epo.push(cu_epoch);
-            						if (value.result == "undefined")
+            						if (value.result[0] == null)
 				                    	{ 
 				                        	rew_in_epo.push(0);
 				                        	rew_in_epo.push(0);
@@ -255,7 +256,14 @@ function showinfo(url, vote_key)
             						    	rew_in_epo.push(value.result[0].postBalance);
             					    	}
             					    	return rew_in_epo;
-            					});
+									}
+									catch(error)
+									{
+										rew_in_epo.push(0);
+				                        rew_in_epo.push(0);
+				                        rew_in_epo.push(0);
+									}
+									});
             					return it;
             				}
             				for (let i = 1; i < 11; i++)
