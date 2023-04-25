@@ -244,7 +244,7 @@ function showinfo(url, vote_key)
             					let it = getrec(data_reward, url).then(function(value)
             					{
             						rew_in_epo.push(cu_epoch);
-            						if (value.result[0] == null)
+            						if (value.result[0] == "undefined")
 				                    	{ 
 				                        	rew_in_epo.push(0);
 				                        	rew_in_epo.push(0);
