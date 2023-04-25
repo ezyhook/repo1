@@ -250,9 +250,9 @@ function showinfo(url, vote_key)
 				                        	rew_in_epo.push(0);
 				                        	rew_in_epo.push(0);
 				                    	} else {
-            						    	rew_in_epo.push(value.result.commission);
-            						    	rew_in_epo.push(value.result.amount);
-            						    	rew_in_epo.push(value.result.postBalance);
+            						    	rew_in_epo.push(value.result[0].commission);
+            						    	rew_in_epo.push(value.result[0].amount);
+            						    	rew_in_epo.push(value.result[0].postBalance);
             					    	}
             					    	return rew_in_epo;
             					});
