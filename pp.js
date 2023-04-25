@@ -244,24 +244,25 @@ function showinfo(url, vote_key)
             					let it = getrec(data_reward, url).then(function(value)
             					{
 									try {
-            						rew_in_epo.push(cu_epoch);
-            						if (value.result[0] == null)
-				                    	{ 
-				                        	rew_in_epo.push(0);
-				                        	rew_in_epo.push(0);
-				                        	rew_in_epo.push(0);
-				                    	} else {
-            						    	rew_in_epo.push(value.result[0].commission);
-            						    	rew_in_epo.push(value.result[0].amount);
-            						    	rew_in_epo.push(value.result[0].postBalance);
-            					    	}
-            					    	return rew_in_epo;
+										rew_in_epo.push(cu_epoch);
+										if (value.result[0] == null)
+											{ 
+												rew_in_epo.push(0);
+												rew_in_epo.push(0);
+												rew_in_epo.push(0);
+											} else {
+												rew_in_epo.push(value.result[0].commission);
+												rew_in_epo.push(value.result[0].amount);
+												rew_in_epo.push(value.result[0].postBalance);
+											}
+											return rew_in_epo;
 									}
 									catch(error)
 									{
 										rew_in_epo.push(0);
 				                        rew_in_epo.push(0);
 				                        rew_in_epo.push(0);
+										return rew_in_epo;
 									}
 									});
             					return it;
