@@ -1,6 +1,6 @@
 let rpc_test = "https://api.testnet.solana.com";
 let rpc_test1 = "https://fittest-serene-liquid.solana-testnet.discover.quiknode.pro/f3e2b1ac3303a0b16938af9fe8985c15310c02e8/";
-let rpc_main = "https://solana--mainnet.datahub.figment.io/apikey/a273d5bc3ab79337e4c0dafc0c45d6df/"
+let rpc_main = "https://mainnet-beta.solflare.network/"
 let rpc_main3 = "https://solana-mainnet.g.alchemy.com/v2/y5WiylJUIpbVSNpXCDB-g3mZjdaaFvC4"
 let rpc_main2 = "https://quaint-frequent-smoke.solana-mainnet.discover.quiknode.pro/c62fc1839a7f9a8e955f3f5783b7de773dca4b72/";
 let rpc_main1 = "https://api.mainnet-beta.solana.com";
