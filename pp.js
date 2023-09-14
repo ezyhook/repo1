@@ -364,7 +364,7 @@ function showinfo(url, vote_key)
 		let sdelal_blokov = getrec(data_BLOCKS_PRODUCTION_JSON, url).then(function(value)
 			{
 				let sdelal_bl;
-				if (value["result"]["value"]["byIdentity"][key] === undefined)
+				if (typeof value["result"]["value"]["byIdentity"][key] === 'undefined')
 				{
 					sdelal_bl = 0;
 				}
@@ -387,7 +387,7 @@ function showinfo(url, vote_key)
 				let end_slot_d = cluster_slot_d1.result.slotsInEpoch;
 				let Done, will_done, skipped, skip, all;
 				let next_slots = [];
-				if (allt_d == 0) {
+				if (typeof allt_d == 'undefined') {
 				    Done = 0;  will_done = 0; skipped = 0; all = 0; 
 				} 
 				else 
