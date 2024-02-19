@@ -269,7 +269,7 @@ function showinfo(url, vote_key)
 									});
             					return it;
             				}
-            				for (let i = 1; i < 11; i++)
+            				for (let i = 1; i < 13; i++)
             				{
             					rew.push(foo(i));
             				}
