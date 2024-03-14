@@ -213,7 +213,7 @@ function showinfo(url, vote_key)
 				let epoch = value.result.epoch;
 				function showrew(values) {
 				    let table1 = "";
-						for (let g = 0; g < 10; g++)
+						for (let g = 0; g < 12; g++)
 						{
 							let item1 = "<tr><td id="+ vote_key +"r1_" + g + "></td><td id="+ vote_key +"r2_" + g + "></td><td id="+ vote_key +"r3_" + g + "></td><td id="+ vote_key +"r4_" + g + "></td></tr>";
 							table1 += item1;
