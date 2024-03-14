@@ -221,7 +221,7 @@ function showinfo(url, vote_key)
 						let outtable1 = "<thead><th>Epoch</th><th>Commission</th><th>Rewards</th><th>Balance</th></tr></thead><tbody>" + table1 + "<th></th><th>Total:</th><th id=sumrew"+ vote_key +"></th><th></th></tr></tbody>";
 						writeHTML("rew_tab" + vote_key, "table", "table", "rew"+ vote_key, outtable1);
 						sum_rew = 0;
-						for (let g = 0; g < 10; g++)
+						for (let g = 0; g < 12; g++)
 						{
 							let ir1 = vote_key + "r1_" + g;
 							let ir2 = vote_key + "r2_" + g;
