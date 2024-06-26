@@ -1,7 +1,7 @@
 let rpc_test = "https://api.testnet.solana.com";
-let rpc_main3 = "https://solana-mainnet.g.alchemy.com/v2/y5WiylJUIpbVSNpXCDB-g3mZjdaaFvC4";
+let rpc_main = "https://solana-mainnet.g.alchemy.com/v2/y5WiylJUIpbVSNpXCDB-g3mZjdaaFvC4";
 let rpc_main2 = "https://quaint-frequent-smoke.solana-mainnet.discover.quiknode.pro/c62fc1839a7f9a8e955f3f5783b7de773dca4b72/";
-let rpc_main = "https://api.mainnet-beta.solana.com";
+let rpc_main_ = "https://api.mainnet-beta.solana.com";
 writeHTML = function(divIN, el, classOP, idOP, s)
 	{
 	    if (divIN == "body") {
