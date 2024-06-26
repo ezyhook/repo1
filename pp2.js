@@ -73,13 +73,12 @@ async function checkValidity(){
                     input.classList.add('text-field__input_invalid');
                     input.nextElementSibling.textContent = 'Not valid';
                 } else {
-                    let pubkey;
                     if (!voteinfo['current']?.length)
                     {
                         input.classList.remove('text-field__input_invalid');
                         input.classList.add('text-field__input_valid');
                         input.nextElementSibling.textContent = 'Pub-key is valid."';
-                        await showinfo(val_url, val_key);
+                        showinfo(val_url, val_key);
                         input.value = "";
                     }
                     else if (!voteinfo['delinquent']?.length)
@@ -87,7 +86,7 @@ async function checkValidity(){
                         input.classList.remove('text-field__input_invalid');
                         input.classList.add('text-field__input_valid');
                         input.nextElementSibling.textContent = 'Pub-key is valid."';
-                        await showinfo(val_url, val_key);
+                        showinfo(val_url, val_key);
                         input.value = "";
                     }
                     else
