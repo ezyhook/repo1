@@ -276,13 +276,13 @@ async function showinfo(url, vote_key)
         let metrics = "<thead><tr><th>Metrics</th><th>Value</th></tr></thead><tbody><tr><td>Delinquent status</td><td id=del"+ vote_key + " class=" + del_status + "></td></tr><tr><td>Balance identity</td><td id=balance"+ vote_key + "></td></tr><tr><td>Activated Stake</td><td id=stake"+ vote_key + "></td></tr><tr><td>All blocks:</td><td id=all"+ vote_key + "></td></tr><tr><td>Done blocks:</td><td id=Done"+ vote_key + "></td></tr><tr><td>Will be done:</td><td id=will_done"+ vote_key + "></td></tr><tr><td>Skipped blocks:</td><td id=skipped"+ vote_key + "></td></tr><tr><td>Skip:</td><td id=skip"+ vote_key + "></td></tr></tbody>";
         writeHTML("info_tab" + vote_key, "table", "table", "metrics" + vote_key, metrics);
         document.getElementById("del"+ vote_key).innerHTML = del_status;
-        document.getElementById("balance"+ vote_key).innerHTML = bala_d + " sol";
+        document.getElementById("balance"+ vote_key).innerHTML = Math.round(bala_d,2) + " sol";
         document.getElementById("all"+ vote_key).innerHTML = all;
         document.getElementById("Done"+ vote_key).innerHTML = Done;
         document.getElementById("will_done"+ vote_key).innerHTML = will_done;
         document.getElementById("skipped"+ vote_key).innerHTML = skipped;
         document.getElementById("skip"+ vote_key).innerHTML = skip + " %";
-        document.getElementById("stake"+ vote_key).innerHTML = stake + " sol";
+        document.getElementById("stake"+ vote_key).innerHTML = Math.round(stake,2) + " sol";
         if (typeof(next_slots[0]) != "undefined" && all > Done)
         {
             let echo = [];
