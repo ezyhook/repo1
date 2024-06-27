@@ -44,8 +44,7 @@ async function getrec(data, url)
 			'Content-Type': 'application/json',
 			'Origin': 'https://repo1-two.vercel.app/'
 		},
-		body: data,
-		mode: 'no-cors'
+		body: data
 	});
 	if (response.ok)
 	{
